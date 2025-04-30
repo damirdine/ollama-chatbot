@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Poetry
+poetry.lock
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.env
+.venv/
+venv/
+env/
+
+# Logs
+*.log
+
+# Pytest
+.cache/
+.coverage
+htmlcov/
+
+# VS Code
+.vscode/
+
+# MyPy
+.mypy_cache/
+
+# FastAPI static or generated content (optional)
+static/
+*.db
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local settings
+*.env
+.env.*
