@@ -1,8 +1,7 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
-app = FastAPI(
-    title="hello",
-)
+app = FastAPI(title="hello", default_response_class=JSONResponse)
 
 
 @app.get(
