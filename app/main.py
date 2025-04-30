@@ -4,10 +4,16 @@ app = FastAPI(
     title="hello",
 )
 
+
 @app.get(
     "/",
 )
 def index():
     return {
-        "msg": "<h1>Bienvenue sur l'application de chat avec Ollama/Deepseek !</h1>"
+        "message": "Bienvenue sur l'application de chat avec Ollama / Deepseek !",
+        "endpoints": {
+            "api": "/api",
+            "docs": "/docs",
+            "chat_html": "/ (via HTML si activé)",
+        },
     }
