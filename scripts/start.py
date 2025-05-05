@@ -1,8 +1,10 @@
-# scripts/start.py
 import os
 import uvicorn
 
-# PORT = 8000
+from dotenv import load_dotenv
+load_dotenv()
+
+PORT = int(os.getenv("PORT", 8000))
 
 def main():
-    uvicorn.run("app.main:app")
+    uvicorn.run("app.main:app", port=PORT)

@@ -1,7 +1,9 @@
 import json
+import os
 import httpx
 
-from dotenv import DotEnv
+from dotenv import load_dotenv
+load_dotenv()
 
 from fastapi.responses import StreamingResponse
 from fastapi import APIRouter, Request
@@ -10,12 +12,11 @@ from app.schemas.chat import ChatRequest
 from app.services.chat_services import ChatService
 from app.domain.models import Conversation
 
-dotenv = DotEnv()
 router = APIRouter()
 chat_service = ChatService()
 
-OLLAMA_API_URL = dotenv.get("OLLAMA_API_URL")
-DEFAULT_MODEL = dotenv.get("DEFAULT_MODEL")
+OLLAMA_API_URL = os.getenv("OLLAMA_API_URL")
+DEFAULT_MODEL = os.getenv("DEFAULT_MODEL")
 
 
 @router.post("/chat")
