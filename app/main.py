@@ -3,8 +3,11 @@ from fastapi.responses import JSONResponse
 
 from app.api.chat import router as chat_router
 
-app = FastAPI(title="hello", default_response_class=JSONResponse)
-
+app = FastAPI(
+    title="Ollama Chatbot API",
+    description="Chatbot local basé sur Ollama + FastAPI avec streaming SSE",
+    version="0.1.0"
+)
 
 @app.get(
     "/",
