@@ -1,17 +1,21 @@
 import json
-from fastapi.responses import StreamingResponse
 import httpx
+
+from dotenv import DotEnv
+
+from fastapi.responses import StreamingResponse
 from fastapi import APIRouter, Request
 
 from app.schemas.chat import ChatRequest
 from app.services.chat_services import ChatService
 from app.domain.models import Conversation
 
-
+dotenv = DotEnv()
 router = APIRouter()
 chat_service = ChatService()
-OLLAMA_API_URL = "http://localhost:11434/api/chat"
-DEFAULT_MODEL = "deepseek-r1:1.5b"
+
+OLLAMA_API_URL = dotenv.get("OLLAMA_API_URL")
+DEFAULT_MODEL = dotenv.get("DEFAULT_MODEL")
 
 
 @router.post("/chat")
