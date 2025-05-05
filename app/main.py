@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
+from app.api.chat import chat_endpoint
+
 app = FastAPI(title="hello", default_response_class=JSONResponse)
 
 
@@ -16,3 +18,6 @@ def index():
             "chat_html": "/ (via HTML si activé)",
         },
     }
+
+
+app.include_router(chat_endpoint)
