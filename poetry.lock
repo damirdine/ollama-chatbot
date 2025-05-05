@@ -178,6 +178,17 @@ files = [
 ]
 
 [[package]]
+name = "dotenv-python"
+version = "0.0.1"
+description = "Read .env(-ish) configuration file for python web applications."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "dotenv-python-0.0.1.zip", hash = "sha256:362e170ca8fd69a70c1aca1fda2ddad0ac270e161e81e59f4039ec11decc14fa"},
+]
+
+[[package]]
 name = "exceptiongroup"
 version = "1.2.2"
 description = "Backport of PEP 654 (exception groups)"
@@ -737,4 +748,4 @@ standard = ["colorama (>=0.4) ; sys_platform == \"win32\"", "httptools (>=0.6.3)
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "e55bde9de2e4d3244b603d0707ce81ed39e863dd8b17df478297f7e8249a0604"
+content-hash = "9eef7084ed2da7c3c4f6455bffbfc39e2250fac4bc818abfc70a52fa3aa931e0"
