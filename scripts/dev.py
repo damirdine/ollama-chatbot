@@ -1,6 +1,6 @@
-# scripts/dev.py
-import uvicorn
+import sys
+from pathlib import Path
 
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-def main():
-    uvicorn.run("app.main:app", host="127.0.0.1", port=8000, reload=True)
+from app.main import app

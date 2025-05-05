@@ -1,15 +1,17 @@
-from fastapi import APIRouter, Request, HTTPException
-from fastapi.responses import StreamingResponse
-from schemas.chat import ChatRequest
-from app.services.chat_service import ChatService
-from app.domain.models import Conversation
-import httpx
 import json
+from fastapi.responses import StreamingResponse
+import httpx
+from fastapi import APIRouter, Request
+
+from app.schemas.chat import ChatRequest
+from app.services.chat_services import ChatService
+from app.domain.models import Conversation
+
 
 router = APIRouter()
 chat_service = ChatService()
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
-DEFAULT_MODEL = "llama3"
+DEFAULT_MODEL = "deepseek-r1:1.5b"
 
 
 @router.post("/chat")

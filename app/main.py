@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-from app.api.chat import chat_endpoint
+from app.api.chat import router as chat_router
 
 app = FastAPI(title="hello", default_response_class=JSONResponse)
 
@@ -20,4 +20,4 @@ def index():
     }
 
 
-app.include_router(chat_endpoint)
+app.include_router(router=chat_router, prefix="/api")
