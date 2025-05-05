@@ -1,6 +1,5 @@
 from app.services.chat_services import ChatService
 import pytest
-from app.services.chat_service import ChatService
 
 @pytest.fixture
 def chat_service():
