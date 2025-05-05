@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ollama Chatbot</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+    #chat { border: 1px solid #ccc; padding: 1rem; height: 400px; overflow-y: auto; white-space: pre-wrap; }
+    input, button { padding: 0.5rem; font-size: 1rem; }
+    #user-input { width: 80%; }
+  </style>
+</head>
+<body>
+  <h1>🧠 Ollama Chatbot</h1>
+  <div id="chat"></div>
+  <br />
+  <input id="user-input" type="text" placeholder="Votre message..." />
+  <button onclick="sendMessage()">Envoyer</button>
+
+  <script>
+    let conversationId = null;
+
+    async function sendMessage() {
+      const input = document.getElementById("user-input");
+      const chat = document.getElementById("chat");
+      const message = input.value.trim();
+      if (!message) return;
+
+      chat.innerHTML += `👤 ${message}\n`;
+      input.value = "";
+
+      const response = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, conversation_id: conversationId })
+      });
+
+      conversationId = response.headers.get("x-conversation-id");
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+
+      chat.innerHTML += "🤖 ";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value);
+        const matches = chunk.match(/data: (.*)/g);
+        if (matches) {
+          for (const line of matches) {
+            const text = line.replace("data: ", "");
+            chat.innerHTML += text;
+          }
+        }
+        chat.scrollTop = chat.scrollHeight;
+      }
+
+      chat.innerHTML += "\n\n";
+    }
+  </script>
+</body>
+</html>
