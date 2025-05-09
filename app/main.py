@@ -1,5 +1,6 @@
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 
 from app.api.chat import router as chat_router
 
@@ -8,19 +9,14 @@ app = FastAPI(
     description="Chatbot local basé sur Ollama + FastAPI avec streaming SSE",
     version="0.1.0"
 )
+templates = Jinja2Templates(directory="app/templates")
 
 @app.get(
     "/",
+    response_class=HTMLResponse
 )
-def index():
-    return {
-        "message": "Bienvenue sur l'application de chat avec Ollama / Deepseek !",
-        "endpoints": {
-            "api": "/api",
-            "docs": "/docs",
-            "chat_html": "/ (via HTML si activé)",
-        },
-    }
+async def index(request : Request):
+    return templates.TemplateResponse("index.html", {"request":request})
 
 
 app.include_router(router=chat_router, prefix="/api")
